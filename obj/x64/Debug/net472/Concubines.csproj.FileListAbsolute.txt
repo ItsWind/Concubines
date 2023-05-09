@@ -1,0 +1,16 @@
+C:\Users\stric\source\repos\Concubines\Concubines\bin\x64\Debug\net472\Concubines.dll
+C:\Users\stric\source\repos\Concubines\Concubines\bin\x64\Debug\net472\Concubines.pdb
+C:\Users\stric\source\repos\Concubines\Concubines\bin\x64\Debug\net472\0Harmony.dll
+C:\Users\stric\source\repos\Concubines\Concubines\bin\x64\Debug\net472\BastardChildren.dll
+C:\Users\stric\source\repos\Concubines\Concubines\bin\x64\Debug\net472\MCMv5.dll
+C:\Users\stric\source\repos\Concubines\Concubines\bin\x64\Debug\net472\Mono.Cecil.dll
+C:\Users\stric\source\repos\Concubines\Concubines\bin\x64\Debug\net472\MCMv5.pdb
+C:\Users\stric\source\repos\Concubines\Concubines\obj\x64\Debug\net472\Concubines.csproj.AssemblyReference.cache
+C:\Users\stric\source\repos\Concubines\Concubines\obj\x64\Debug\net472\Concubines.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\stric\source\repos\Concubines\Concubines\obj\x64\Debug\net472\Concubines.AssemblyInfoInputs.cache
+C:\Users\stric\source\repos\Concubines\Concubines\obj\x64\Debug\net472\Concubines.AssemblyInfo.cs
+C:\Users\stric\source\repos\Concubines\Concubines\obj\x64\Debug\net472\Concubines.csproj.CoreCompileInputs.cache
+C:\Users\stric\source\repos\Concubines\Concubines\obj\x64\Debug\net472\Concubines.csproj.CopyComplete
+C:\Users\stric\source\repos\Concubines\Concubines\obj\x64\Debug\net472\Concubines.dll
+C:\Users\stric\source\repos\Concubines\Concubines\obj\x64\Debug\net472\Concubines.pdb
+C:\Users\stric\source\repos\Concubines\Concubines\bin\x64\Debug\net472\BastardChildren.pdb
