@@ -19,8 +19,6 @@ namespace Concubines.Models {
         public Hero Hero;
         [SaveableField(2)]
         public Dictionary<Hero, Clan> Concubines = new();
-        [SaveableField(3)]
-        public Dictionary<Hero, Clan> WandererConcubines = new();
 
         public static ConcubineList GetFor(Hero hero) {
             ConcubineList data;
@@ -46,11 +44,10 @@ namespace Concubines.Models {
             Clan toReturnTo = concubine.Clan;
             if (concubine.Occupation == Occupation.Wanderer) {
                 concubine.CompanionOf = null;
-                WandererConcubines[concubine] = toReturnTo;
+                concubine.SetNewOccupation(Occupation.Lord);
             }
             Concubines[concubine] = toReturnTo;
 
-            concubine.SetNewOccupation(Occupation.Lord);
             concubine.Clan = Hero.Clan;
         }
 
@@ -60,16 +57,8 @@ namespace Concubines.Models {
 
             Clan clanToReturnTo = Concubines[concubine];
 
-            if (!dontSendToOldClan) {
-                if (WandererConcubines.ContainsKey(concubine)) {
-                    concubine.CompanionOf = clanToReturnTo;
-                    concubine.Clan = null;
-                    concubine.SetNewOccupation(Occupation.Wanderer);
-                    WandererConcubines.Remove(concubine);
-                } else {
-                    concubine.Clan = clanToReturnTo;
-                }
-            }
+            if (!dontSendToOldClan)
+                concubine.Clan = clanToReturnTo;
 
             Concubines.Remove(concubine);
 

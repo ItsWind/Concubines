@@ -8,8 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Conversation;
-using TaleWorlds.CampaignSystem.ViewModelCollection;
+using TaleWorlds.CampaignSystem.ViewModelCollection.Encyclopedia.Items;
 using TaleWorlds.CampaignSystem.ViewModelCollection.Encyclopedia.Pages;
+using TaleWorlds.Library;
 
 namespace Concubines.Patches {
     [HarmonyPatch(typeof(ConversationHelper), nameof(ConversationHelper.GetHeroRelationToHeroTextShort))]
@@ -30,24 +31,24 @@ namespace Concubines.Patches {
         }
     }
 
-    [HarmonyPatch(typeof(EncyclopediaHeroPageVM), nameof(EncyclopediaHeroPageVM.RefreshValues))]
+    [HarmonyPatch(typeof(EncyclopediaHeroPageVM), nameof(EncyclopediaHeroPageVM.Refresh))]
     internal class EncyclopediaPagePatch {
         [HarmonyPostfix]
         private static void Postfix(EncyclopediaHeroPageVM __instance) {
-            Hero hero = (Hero)AccessTools.Field(typeof(HeroViewModel), "_hero").GetValue(__instance.HeroCharacter);
-            List<Hero> relatedHeroes = (List<Hero>)AccessTools.Field(typeof(EncyclopediaHeroPageVM), "_allRelatedHeroes").GetValue(__instance);
-            if (hero == null || relatedHeroes == null)
+            Hero hero = (Hero)AccessTools.Field(typeof(EncyclopediaHeroPageVM), "_hero").GetValue(__instance);
+            MBBindingList<EncyclopediaFamilyMemberVM> family = (MBBindingList<EncyclopediaFamilyMemberVM>)AccessTools.Field(typeof(EncyclopediaHeroPageVM), "_family").GetValue(__instance);
+            if (hero == null || family == null)
                 return;
 
             Hero? concubineOf = hero.ConcubineOf();
-            if (concubineOf != null && !relatedHeroes.Contains(concubineOf))
-                relatedHeroes.Add(concubineOf);
+            if (concubineOf != null && !family.Any(x => x.Hero == concubineOf))
+                family.Add(new EncyclopediaFamilyMemberVM(concubineOf, hero));
 
             ConcubineList? data = hero.IsParamour();
             if (data != null)
                 foreach (Hero concubine in data.Concubines.Keys)
-                    if (!relatedHeroes.Contains(concubine))
-                        relatedHeroes.Add(concubine);
+                    if (!family.Any(x => x.Hero == concubine))
+                        family.Add(new EncyclopediaFamilyMemberVM(concubine, hero));
         }
     }
 }

@@ -40,9 +40,14 @@ namespace Concubines {
             // BUG FIX
             if (dataStore.IsLoading) {
                 foreach (ConcubineList data in ConcubineData.ToList()) {
-                    if (Campaign.Current.AliveHeroes.Contains(data.Hero))
-                        continue;
-                    data.Delete(true);
+                    if (!Campaign.Current.AliveHeroes.Contains(data.Hero)) {
+                        data.Delete(true);
+                        return;
+                    }
+
+                    foreach (Hero concubine in data.Concubines.Keys.ToList())
+                        if (concubine.Occupation != Occupation.Lord)
+                            concubine.SetNewOccupation(Occupation.Lord);
                 }
             }
         }
